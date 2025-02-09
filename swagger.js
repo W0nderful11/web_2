@@ -1,7 +1,3 @@
-const swaggerJSDoc = require('swagger-jsdoc');
-const swaggerUi = require('swagger-ui-express');
-
-// Конфигурация Swagger
 const swaggerOptions = {
   swaggerDefinition: {
     openapi: '3.0.0',
@@ -15,10 +11,21 @@ const swaggerOptions = {
         url: 'http://localhost:3000',
       },
     ],
+    components: {
+      schemas: {
+        Book: {
+          type: 'object',
+          properties: {
+            title: { type: 'string' },
+            author: { type: 'string' },
+            year: { type: 'integer' },
+            genre: { type: 'string' },
+          },
+          required: ['title', 'author', 'year', 'genre'],
+        },
+      },
+    },
   },
-  apis: ['./routes/*.js'], // Укажи путь к файлам с описанием эндпоинтов
+  // Указываем путь к файлам маршрутов
+  apis: ['./routes/*.js'], // Все файлы .js в папке routes
 };
-
-const swaggerDocs = swaggerJSDoc(swaggerOptions);
-
-module.exports = { swaggerUi, swaggerDocs };
