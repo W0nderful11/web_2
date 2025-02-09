@@ -1,6 +1,9 @@
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
+const { swaggerUi, swaggerDocs } = require('./swagger');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
+
 // Конфигурация Swagger
 const swaggerOptions = {
   swaggerDefinition: {

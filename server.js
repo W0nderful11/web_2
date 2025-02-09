@@ -3,31 +3,34 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 const bookRoutes = require('./routes/bookRoutes');
+const weatherRoutes = require('./routes/weatherRoutes');
+const { swaggerUi, swaggerDocs } = require('./swagger');
 
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Подключение к MongoDB
-mongoose.connect('mongodb://localhost:27017/dbname');
+// MongoDB connection
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch(err => console.error('Failed to connect to MongoDB', err));
 
 // Middleware
 app.use(bodyParser.json());
 
-// Маршруты
+// Routes
 app.use('/api', bookRoutes);
-
-// Запуск сервера
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
-
-const weatherRoutes = require('./routes/weatherRoutes');
 app.use('/api', weatherRoutes);
 
-const swaggerSetup = require('./swagger');
-// swaggerSetup(app);
+// Swagger documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
+// Home route
 app.get('/', (req, res) => {
   res.send('API is running!');
+});
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });

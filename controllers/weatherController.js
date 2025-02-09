@@ -14,6 +14,10 @@ exports.getWeather = async (req, res) => {
       condition: weather[0].description,
     });
   } catch (err) {
-    res.status(400).json({ message: 'Город не найден' });
+    if (err.response && err.response.status === 404) {
+      res.status(404).json({ message: 'City not found' });
+    } else {
+      res.status(500).json({ message: 'Failed to fetch weather data', error: err.message });
+    }
   }
 };
