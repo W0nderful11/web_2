@@ -14,8 +14,11 @@ module.exports = router;
  * @swagger
  * /books:
  *   get:
- *     summary: Получить все книги
+ *     summary: Получить список книг
  *     responses:
  *       200:
- *         description: Список книг
+ *         description: Успешный ответ
  */
+app.get('/books', (req, res) => {
+    // Логика обработки запроса
+  });

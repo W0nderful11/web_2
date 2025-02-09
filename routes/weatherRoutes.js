@@ -6,3 +6,15 @@ const router = express.Router();
 router.get('/weather/:city', weatherController.getWeather);
 
 module.exports = router;
+/**
+ * @swagger
+ * /books:
+ *   get:
+ *     summary: Получить список книг
+ *     responses:
+ *       200:
+ *         description: Успешный ответ
+ */
+app.get('/books', (req, res) => {
+    // Логика обработки запроса
+  });
