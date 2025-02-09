@@ -20,7 +20,6 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/api', bookRoutes);
-const weatherRoutes = require('./routes/weatherRoutes');
 app.use('/api', weatherRoutes);
 
 
