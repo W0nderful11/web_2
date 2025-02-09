@@ -19,6 +19,3 @@ module.exports = router;
  *       200:
  *         description: Успешный ответ
  */
-app.get('/books', (req, res) => {
-    // Логика обработки запроса
-  });
