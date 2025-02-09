@@ -20,7 +20,9 @@ app.use(bodyParser.json());
 
 // Routes
 app.use('/api', bookRoutes);
+const weatherRoutes = require('./routes/weatherRoutes');
 app.use('/api', weatherRoutes);
+
 
 // Swagger documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs));
