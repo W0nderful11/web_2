@@ -9,9 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Подключение к MongoDB
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('Could not connect to MongoDB', err));
+mongoose.connect('mongodb://localhost:27017/dbname');
 
 // Middleware
 app.use(bodyParser.json());
@@ -28,4 +26,8 @@ const weatherRoutes = require('./routes/weatherRoutes');
 app.use('/api', weatherRoutes);
 
 const swaggerSetup = require('./swagger');
-swaggerSetup(app);
+// swaggerSetup(app);
+
+app.get('/', (req, res) => {
+  res.send('API is running!');
+});
