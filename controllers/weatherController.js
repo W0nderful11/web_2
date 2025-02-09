@@ -7,6 +7,7 @@ exports.getWeather = async (req, res) => {
 
   try {
     const response = await axios.get(url);
+    console.log('API Response:', response.data); // Логируем ответ
     const { name, main, weather } = response.data;
     res.status(200).json({
       city: name,
@@ -14,6 +15,7 @@ exports.getWeather = async (req, res) => {
       condition: weather[0].description,
     });
   } catch (err) {
+    console.error('API Error:', err.response ? err.response.data : err.message); // Логируем ошибку
     if (err.response && err.response.status === 404) {
       res.status(404).json({ message: 'City not found' });
     } else {
